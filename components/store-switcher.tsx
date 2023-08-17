@@ -24,6 +24,7 @@ export default function StoreSwitcher ({
   className,
   items=[]
 }: StoreSwitcherProps) {
+  
   const storeModal=useStoreModal();
   const params = useParams();
   const router = useRouter();
@@ -45,7 +46,7 @@ export default function StoreSwitcher ({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <Button
          variant="outline"
          size="sm"
