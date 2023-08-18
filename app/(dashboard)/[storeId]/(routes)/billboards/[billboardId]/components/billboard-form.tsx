@@ -17,6 +17,7 @@ import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { ApiAlert } from "@/components/ui/api-alert";
 import { useOrigin } from "@/hooks/use-origin";
+import ImageUpload from "@/components/ui/image-upload";
 
 
 const formSchema= z.object({
@@ -42,8 +43,8 @@ export const BillboardForm: React.FC<BillboardFormProps>= ({
 
   const title = initialData ? "Edit Billboard" : "Create Billboard";
   const description = initialData ? "Edit Billboard." : "Add a new Billboard.";
-  const toastMessage = initialData ? "Billboard updated." : "Create Billboard.";
-  const action = initialData ? "Save Changes." : "Create Billboard.";
+  const toastMessage = initialData ? "Billboard updated." : "Billboard created.";
+  const action = initialData ? "Save Changes" : "Create";
 
   const form = useForm<BillboardFormValues>({
     resolver:zodResolver(formSchema),
@@ -108,6 +109,26 @@ export const BillboardForm: React.FC<BillboardFormProps>= ({
     <Separator/>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8  w-full">
+        <FormField
+            control={form.control}
+            name="imageUrl"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Background Image
+                </FormLabel>
+                <FormControl>
+                <ImageUpload 
+                  value={field.value ? [field.value] : []}
+                  disabled={loading}
+                  onChange={(url) => field.onChange(url)}
+                  onRemove={()=> field.onChange("")}
+                />
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+              )}
+          />
        <div className="grid grid-cols-3 gap-8">
         <FormField
           control={form.control}
