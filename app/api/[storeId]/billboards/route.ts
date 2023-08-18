@@ -61,8 +61,6 @@ export async function POST(
   }
 }
 
-
-
 export async function GET(
   req: Request,
   {params} : {params: {storeId: string}}
