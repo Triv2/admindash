@@ -42,7 +42,7 @@ export const BillboardForm: React.FC<BillboardFormProps>= ({
   const [loading, setLoading] = useState(false);
 
   const title = initialData ? "Edit Billboard" : "Create Billboard";
-  const description = initialData ? "Edit Billboard." : "Add a new Billboard.";
+  const description = initialData ? "Edit Billboard" : "Add a new Billboard";
   const toastMessage = initialData ? "Billboard updated." : "Billboard created.";
   const action = initialData ? "Save Changes" : "Create";
 
@@ -64,6 +64,7 @@ export const BillboardForm: React.FC<BillboardFormProps>= ({
         await axios.post(`/api/${params.storeId}/billboards`, data)
       }
       router.refresh();
+      router.push(`/${params.storeId}/billboards`);
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong.");
