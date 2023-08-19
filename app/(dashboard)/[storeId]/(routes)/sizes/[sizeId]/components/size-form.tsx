@@ -17,7 +17,7 @@ import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 
-import ImageUpload from "@/components/ui/image-upload";
+
 
 
 const formSchema= z.object({
@@ -81,7 +81,7 @@ export const SizeForm: React.FC<SizeFormProps>= ({
       router.push(`/${params.storeId}/sizes`);
       toast.success("Size deleted successfully");
     } catch (error) {
-      toast.error("Make sure you removed all categories using this billboard first.");
+      toast.error("Make sure you removed all products using this size first.");
     } finally {
       setLoading(false);
       setOpen(false);
