@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { Trash } from "lucide-react";
 
 import * as z from "zod";
-import { Billboard } from "@prisma/client";
+import {  Category } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -17,21 +17,20 @@ import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 
-import ImageUpload from "@/components/ui/image-upload";
 
 
 const formSchema= z.object({
-  label: z.string().min(1),
-  imageUrl:z.string().min(1),
+  name: z.string().min(1),
+  billboardId:z.string().min(1),
 });
 
-type BillboardFormValues = z.infer<typeof formSchema>
+type CategoryFormValues = z.infer<typeof formSchema>
 
-interface BillboardFormProps {
-  initialData:Billboard | null;
+interface CategoryFormProps {
+  initialData:Category | null;
 }
 
-export const BillboardForm: React.FC<BillboardFormProps>= ({
+export const CategoryForm: React.FC<CategoryFormProps>= ({
   initialData
 }) => {
   const params = useParams();
@@ -41,20 +40,20 @@ export const BillboardForm: React.FC<BillboardFormProps>= ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const title = initialData ? "Edit Billboard" : "Create Billboard";
-  const description = initialData ? "Edit Billboard" : "Add a new Billboard";
-  const toastMessage = initialData ? "Billboard updated." : "Billboard created.";
+  const title = initialData ? "Edit Category" : "Create Category";
+  const description = initialData ? "Edit Category" : "Add a new Category";
+  const toastMessage = initialData ? "Category updated." : "Category created.";
   const action = initialData ? "Save Changes" : "Create";
 
-  const form = useForm<BillboardFormValues>({
+  const form = useForm<CategoryFormValues>({
     resolver:zodResolver(formSchema),
     defaultValues: initialData || {
-      label:'',
-      imageUrl:'',
+      name:'',
+      billboardId:'',
     },
   });
 
-  const onSubmit = async (data:BillboardFormValues) => {
+  const onSubmit = async (data:CategoryFormValues) => {
     try {
       setLoading(true);
 
@@ -115,37 +114,33 @@ export const BillboardForm: React.FC<BillboardFormProps>= ({
     <Separator/>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8  w-full">
-        <FormField
-            control={form.control}
-            name="imageUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  Background Image
-                </FormLabel>
-                <FormControl>
-                <ImageUpload 
-                  value={field.value ? [field.value] : []}
-                  disabled={loading}
-                  onChange={(url) => field.onChange(url)}
-                  onRemove={()=> field.onChange("")}
-                />
-                </FormControl>
-                <FormMessage/>
-              </FormItem>
-              )}
-          />
+        
        <div className="grid grid-cols-3 gap-8">
         <FormField
           control={form.control}
-          name="label"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                Label
+                Name
               </FormLabel>
               <FormControl>
-               <Input disabled={loading} placeholder="Billboard Label" {...field}/>
+               <Input disabled={loading} placeholder="Category name" {...field}/>
+              </FormControl>
+              <FormMessage/>
+            </FormItem>
+            )}
+        />
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Name
+              </FormLabel>
+              <FormControl>
+               <Input disabled={loading} placeholder="Category name" {...field}/>
               </FormControl>
               <FormMessage/>
             </FormItem>
@@ -162,4 +157,4 @@ export const BillboardForm: React.FC<BillboardFormProps>= ({
   </>
   );
 };
-export default BillboardForm;
+export default CategoryForm;
