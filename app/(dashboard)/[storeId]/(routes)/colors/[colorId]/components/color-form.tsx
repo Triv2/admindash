@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { Trash } from "lucide-react";
 
 import * as z from "zod";
-import { Size } from "@prisma/client";
+import { Color } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -25,13 +25,13 @@ const formSchema= z.object({
   value:z.string().min(1),
 });
 
-type SizeFormValues = z.infer<typeof formSchema>
+type ColorFormValues = z.infer<typeof formSchema>
 
-interface SizeFormProps {
-  initialData:Size | null;
+interface ColorFormProps {
+  initialData:Color | null;
 }
 
-export const SizeForm: React.FC<SizeFormProps>= ({
+export const ColorForm: React.FC<ColorFormProps>= ({
   initialData
 }) => {
   const params = useParams();
@@ -41,12 +41,12 @@ export const SizeForm: React.FC<SizeFormProps>= ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const title = initialData ? "Edit Size" : "Create Size";
-  const description = initialData ? "Edit Size" : "Add a new Size";
-  const toastMessage = initialData ? "Size updated." : "Size created.";
+  const title = initialData ? "Edit Color" : "Create Color";
+  const description = initialData ? "Edit Color" : "Add a new color";
+  const toastMessage = initialData ? "color updated." : "Size created.";
   const action = initialData ? "Save Changes" : "Create";
 
-  const form = useForm<SizeFormValues>({
+  const form = useForm<ColorFormValues>({
     resolver:zodResolver(formSchema),
     defaultValues: initialData || {
       name:'',
@@ -54,17 +54,17 @@ export const SizeForm: React.FC<SizeFormProps>= ({
     },
   });
 
-  const onSubmit = async (data:SizeFormValues) => {
+  const onSubmit = async (data:ColorFormValues) => {
     try {
       setLoading(true);
 
       if(initialData) {
-        await axios.patch(`/api/${params.storeId}/sizes/${params.sizeId}`, data)
+        await axios.patch(`/api/${params.storeId}/colors/${params.colorId}`, data)
       } else {
-        await axios.post(`/api/${params.storeId}/sizes`, data)
+        await axios.post(`/api/${params.storeId}/colors`, data)
       }
       router.refresh();
-      router.push(`/${params.storeId}/sizes`);
+      router.push(`/${params.storeId}/colors`);
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong.");
@@ -76,12 +76,12 @@ export const SizeForm: React.FC<SizeFormProps>= ({
   const onDelete = async () => {
     try{
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`);
+      await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`);
       router.refresh();
-      router.push(`/${params.storeId}/sizes`);
-      toast.success("Size deleted successfully");
+      router.push(`/${params.storeId}/colors`);
+      toast.success("Color deleted successfully");
     } catch (error) {
-      toast.error("Make sure you removed all products using this size first.");
+      toast.error("Make sure you removed all products using this color first.");
     } finally {
       setLoading(false);
       setOpen(false);
@@ -157,4 +157,4 @@ export const SizeForm: React.FC<SizeFormProps>= ({
   </>
   );
 };
-export default SizeForm;
+export default ColorForm;
