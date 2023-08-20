@@ -1,6 +1,6 @@
 'use client'
 
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage, FormDescription } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
@@ -20,6 +20,7 @@ import { AlertModal } from "@/components/modals/alert-modal";
 
 import ImageUpload from "@/components/ui/image-upload";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 
 
 const formSchema= z.object({
@@ -185,7 +186,7 @@ export const ProductForm: React.FC<ProductFormProps>= ({
                 Price
               </FormLabel>
               <FormControl>
-               <Input type="number" disabled={loading} placeholder="0.00" {...field}/>
+               <Input type="number" disabled={loading} placeholder="1.23  " {...field}/>
               </FormControl>
               <FormMessage/>
             </FormItem>
@@ -217,6 +218,110 @@ export const ProductForm: React.FC<ProductFormProps>= ({
               </SelectContent>
               </Select>
               <FormMessage/>
+            </FormItem>
+            )}
+        />
+        <FormField
+          control={form.control}
+          name="sizeId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Size
+              </FormLabel>
+              <Select disabled={loading} onValueChange={field.onChange} value={field.value} defaultValue={field.value}>
+              <FormControl>
+                <SelectTrigger>
+                  <SelectValue defaultValue={field.value} placeholder="Select a size"/>
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                {sizes.map((size)=>(
+                  <SelectItem
+                  key={size.id}
+                  value={size.id}
+                  >
+                    {size.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+              </Select>
+              <FormMessage/>
+            </FormItem>
+            )}
+        />
+        <FormField
+          control={form.control}
+          name="colorId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Color
+              </FormLabel>
+              <Select disabled={loading} onValueChange={field.onChange} value={field.value} defaultValue={field.value}>
+              <FormControl>
+                <SelectTrigger>
+                  <SelectValue defaultValue={field.value} placeholder="Select a color"/>
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                {colors.map((color)=>(
+                  <SelectItem
+                  key={color.id}
+                  value={color.id}
+                  >
+                    {color.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+              </Select>
+              <FormMessage/>
+            </FormItem>
+            )}
+        />
+        <FormField
+          control={form.control}
+          name="isFeatured"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+              <FormControl>
+              <Checkbox
+                checked={field.value}
+                // @ts-ignore
+                onCheckedChange={field.onChange}
+              />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel>
+                  Featured
+                </FormLabel>
+                <FormDescription>
+                  This product will appear on the homepage.
+                </FormDescription>
+              </div>
+            </FormItem>
+            )}
+        />
+        <FormField
+          control={form.control}
+          name="isArchived"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+              <FormControl>
+              <Checkbox
+                checked={field.value}
+                // @ts-ignore
+                onCheckedChange={field.onChange}
+              />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel>
+                  Archived
+                </FormLabel>
+                <FormDescription>
+                  This product will not appear anywhere in the store.
+                </FormDescription>
+              </div>
             </FormItem>
             )}
         />
