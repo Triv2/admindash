@@ -34,7 +34,7 @@ export const ProductClient:React.FC<ProductClientProps> = ({
     </div>
     <Separator/>
     <DataTable
-      searchKey="label"
+      searchKey="name"
       columns={columns}
       data={data}
     />
