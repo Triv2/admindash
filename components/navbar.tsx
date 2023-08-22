@@ -1,5 +1,4 @@
 
-
 import { UserButton, auth } from "@clerk/nextjs";
 import { MainNav } from "@/components/mainnav";
 import StoreSwitcher from "@/components/store-switcher";
