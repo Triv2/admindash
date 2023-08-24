@@ -26,7 +26,7 @@ return null;
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="p-2" >
-        <MainNav className="mx-6 flex-col items-start gap-2 lg:flex-row lg:hidden"/>
+        <MainNav className="mx-6 space-x-1 flex-col items-start gap-2 lg:flex-row lg:hidden"/>
         </DropdownMenuContent>
         </DropdownMenu>
   );
