@@ -64,8 +64,7 @@ export function MainNav ({
         route.active ? "text-black dark:text-white ":"text-muted-foreground")}
         >
       {route.label}
-      </Link>
-      
+      </Link>  
     ))}
   </nav>
   );

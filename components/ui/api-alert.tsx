@@ -40,7 +40,7 @@ export const ApiAlert:React.FC<ApiAlertProps> = ({
         </Badge>
       </AlertTitle>
       <AlertDescription className="mt-4 flex items-center justify-between">
-        <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono font-semibold text-sm">
+        <code className="relative line-clamp-3 overflow-auto flex-wrap rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono font-semibold text-sm">
           {description}
         </code>
         <Button variant="outline" size="icon" onClick={onCopy}>
