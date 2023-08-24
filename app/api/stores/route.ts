@@ -3,7 +3,6 @@ import {auth} from "@clerk/nextjs";
 
 import prismadb from "@/lib/prismadb";
 
-// POST = CREATE FROM CRUD, GET = READ FROM CRUD, PUT = UPDATE FROM CRUD, DELETE = DELETE FROM CRUD
 
 
 export async function POST(

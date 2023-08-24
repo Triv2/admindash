@@ -45,7 +45,7 @@ export const ColorForm: React.FC<ColorFormProps>= ({
 
   const title = initialData ? "Edit Color" : "Create Color";
   const description = initialData ? "Edit Color" : "Add a new color";
-  const toastMessage = initialData ? "color updated." : "Size created.";
+  const toastMessage = initialData ? "Color updated." : "Color created.";
   const action = initialData ? "Save Changes" : "Create";
 
   const form = useForm<ColorFormValues>({
