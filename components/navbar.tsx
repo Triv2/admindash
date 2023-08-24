@@ -25,10 +25,10 @@ const Navbar = async ()=> {
   return(
   <div className="border-b">
     <div className="flex h-16 items-center px-4">
-      <StoreSwitcher items={stores}/>
+      <StoreSwitcher className="mr-2"items={stores}/>
       <MainNav className="mx-6 hidden lg:flex"/>
-      <div className="ml-auto flex items-center space-x-4">
-      <MobileNav/>
+      <div className="ml-auto flex items-center space-x-1 sm:space-x-4">
+        <MobileNav/>
         <ThemeToggle/>
         <UserButton afterSignOutUrl="/"/>
       </div>
