@@ -140,7 +140,7 @@ export const TestimonialForm: React.FC<TestimonialFormProps>= ({
               </FormItem>
               )}
           />
-       <div className="grid grid-cols-3 gap-8">
+       <div className="grid sm:grid-cols-3 gap-8">
         <FormField
           control={form.control}
           name="name"
