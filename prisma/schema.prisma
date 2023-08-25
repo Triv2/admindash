@@ -21,6 +21,7 @@ model Store {
   sizes Size[] @relation("StoreToSize")
   colors Color[] @relation("StoreToColor")
   orders Order[] @relation("StoreToOrder")
+  testimonials Testimonial[] @relation("StoreToTestimonial")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -139,4 +140,19 @@ model OrderItem {
 
   @@index([orderId])
   @@index([productId])
+}
+
+model Testimonial {
+  id String @id @default(uuid())
+  storeId String
+  store Store @relation("StoreToTestimonial", fields:[storeId], references: [id])
+  name String
+  title String
+  rating String
+  message String
+  imageUrl String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
 }

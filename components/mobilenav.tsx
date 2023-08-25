@@ -21,7 +21,7 @@ return null;
   return (
     <DropdownMenu>
         <DropdownMenuTrigger className="flex lg:hidden">
-          <Button size="icon">
+          <Button variant="outline" size="icon">
             <Menu/>
           </Button>
         </DropdownMenuTrigger>
