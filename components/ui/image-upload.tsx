@@ -20,7 +20,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
   onRemove,
   value
 }) => {
-  // state = isMounted, useEffect to set state when opened, validation to maintain consistency: THIS FIXES HYDRATION ERRORS
+  
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
